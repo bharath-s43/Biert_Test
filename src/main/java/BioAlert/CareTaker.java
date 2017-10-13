@@ -2,24 +2,35 @@ package BioAlert;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
 public class CareTaker {
 	
+
+	
 	WebDriver driver = EmailVerification.getdriver();
+	
 	
 	@When("^user clicks on the add new caretaker button$")
 	public void user_clicks_on_the_add_new_caretaker_button() throws Throwable {
+		
+		WebDriverWait wait = new WebDriverWait(driver, 20);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[contains(text(), 'ADD NEW CARETAKER')]")));
 		driver.findElement(By.xpath("//button[contains(text(), 'ADD NEW CARETAKER')]")).click();
 	}
 	
 	@Then("^enter the caretaker registration details$")
 	public void enter_the_caretaker_registration_details() throws Throwable {
+		
+		WebDriverWait wait = new WebDriverWait(driver, 20);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("firstName")));
 		driver.findElement(By.name("firstName")).sendKeys("Mark");
-		driver.findElement(By.name("firstName")).sendKeys("Thomas");
+		driver.findElement(By.name("lastName")).sendKeys("Thomas");
 		driver.findElement(By.name("email_id")).sendKeys("mark@gmail.com");
 		Select country_code = new Select(driver.findElement(By.xpath("//select[@class='form-control ng-pristine ng-untouched ng-valid']")));
 		country_code.selectByVisibleText("India (+91)");
@@ -32,12 +43,15 @@ public class CareTaker {
 	
 	@Then("^click on confirm$")
 	public void click_on_confirm() throws Throwable {
+		
+		WebDriverWait wait = new WebDriverWait(driver, 20);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[contains(text(), 'CONFIRM')]")));
 		driver.findElement(By.xpath("//button[contains(text(), 'CONFIRM')]")).click();
 		Thread.sleep(3000);
 	}
 
 	@Then("^accept terms and conditions$")
-	public void accept_terms_and_conditions() throws Throwable {
+public void accept_terms_and_conditions() throws Throwable {
 		driver.findElement(By.xpath("//input [@class='ng-pristine ng-untouched ng-valid']")).click();
 		driver.findElement(By.xpath("//button[contains(text(), 'AGREED')]")).click();
 		
@@ -48,7 +62,6 @@ public class CareTaker {
 		driver.findElement(By.xpath("//button[contains(text(), 'ACTIVATE SERVICE')]")).click();
 		
 		driver.findElement(By.xpath("//button[contains(text(), 'LATER')]")).click();
-		
 	}
 	@Then("^activate paid service$")
 	public void activate_paid_service() throws Throwable {

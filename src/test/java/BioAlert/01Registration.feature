@@ -1,4 +1,4 @@
-Feature: Registartion
+Feature: Registration
 
 Scenario: Register with new user
 Given go to bioalert portal

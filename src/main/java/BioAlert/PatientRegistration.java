@@ -5,6 +5,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 
+import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
 public class PatientRegistration {
@@ -38,5 +39,9 @@ public class PatientRegistration {
 		driver.findElement(By.id("city")).sendKeys(Keys.TAB);
 		driver.findElement(By.id("city")).sendKeys(Keys.ENTER);
 	}
-
+@Then("^click on submit button$")
+public void click_on_submit_button() throws Throwable {
+	driver.findElement(By.xpath("//button[contains(text(), 'SUBMIT')]")).click();
+	Thread.sleep(3000);
+}
 }

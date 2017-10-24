@@ -40,8 +40,10 @@ public class Registration {
 
 	@Then("^click on submit$")
 	public void click_on_submit() throws Throwable {
+		Thread.sleep(2000);
 		driver.findElement(By.xpath("//button[contains(text(), 'SUBMIT')]")).click();
 		Thread.sleep(3000);
+		driver.close();
 	}
 	
 	@Then("^verify the email$")

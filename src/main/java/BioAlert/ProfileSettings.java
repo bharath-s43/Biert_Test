@@ -1,7 +1,15 @@
 package BioAlert;
 
+import java.util.List;
+import java.util.Set;
+
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -12,8 +20,12 @@ public class ProfileSettings {
 	
 	@Given("^go to profile settings page$")
 	public void go_to_profile_settings_page() throws Throwable {
-	 driver.findElement(By.xpath("//span [@class='caret']")).click();
-		driver.findElement(By.xpath("//a[contains(text(), 'Profile Settings')]")).click();
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[contains(text(), 'HOME')]")));	
+		driver.findElement(By.xpath("//button[contains(text(), 'HOME')]")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[contains(text(), 'PATIENT PROFILE')]")));
+		driver.findElement(By.xpath("//center[contains(text(), 'Payments')]")).click();
+		driver.findElement(By.xpath("//center[contains(text(), 'Profile Settings')]")).click();
 	 
 	}
 
@@ -33,7 +45,10 @@ public class ProfileSettings {
 	@Then("^click on save profile$")
 	public void click_on_save_profile() throws Throwable {
 		driver.findElement(By.xpath("//button[contains(text(), 'Save Profile')]")).click();
-		driver.findElement(By.xpath("//button[contains(text(), 'OK')]")).click();
+		Thread.sleep(2000);
+		//.btn.btn-primary.ng-binding
+		driver.findElement(By.xpath("//*[@id='updateprofile']/div/div[3]/center/button")).click();
+		
 	}
 	
 	@Then("^change the password$")
@@ -42,8 +57,17 @@ public class ProfileSettings {
 		 driver.findElement(By.xpath("//input [@ng-model='oldpassword']")).sendKeys("#abcd123");
 		 driver.findElement(By.xpath("//input [@ng-model='newpassword']")).sendKeys("#abcd1234");
 		 driver.findElement(By.xpath("//input [@ng-model='confirmpassword']")).sendKeys("#abcd1234");
+		 ((JavascriptExecutor) driver)
+	     .executeScript("window.scrollTo(0, document.body.scrollHeight)");
 			driver.findElement(By.xpath("//button[contains(text(), 'Change Password')]")).click();
+			Thread.sleep(2000);
+			driver.findElement(By.xpath("//*[@id='changepassword']/div/div[3]/center/button")).click();
 		 
-
+	}
+	
+	@Given("^logout of the portal$")
+	public void logout_of_the_portal() throws Throwable {
+		Thread.sleep(3000);
+		driver.findElement(By.xpath("//a[@ng-click='logout()']")).click();
 	}
 }

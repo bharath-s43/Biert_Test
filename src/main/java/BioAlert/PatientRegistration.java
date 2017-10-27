@@ -25,7 +25,7 @@ public class PatientRegistration {
 		driver.findElement(By.name("mobile")).sendKeys("8785745455");
 		driver.findElement(By.id("date")).sendKeys("12251999");
 		driver.findElement(By.xpath("//input[@value='Male']")).click();
-		driver.findElement(By.name("address")).sendKeys("Kumar");
+		driver.findElement(By.name("address")).sendKeys("A-6 Safal Profitaire,Corporate Road");
 		driver.findElement(By.id("country")).sendKeys("India");
 		Thread.sleep(1000);
 		driver.findElement(By.id("country")).sendKeys(Keys.TAB);

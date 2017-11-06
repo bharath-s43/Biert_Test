@@ -22,12 +22,16 @@ public class EmailVerification {
 	driver.manage().window().maximize();
 	
 	driver.findElement(By.name("identifier")).sendKeys("bharathsb43@gmail.com");
+	Thread.sleep(2000);
 	driver.findElement(By.xpath("//span[contains(text(), 'Next')]")).click();
+	Thread.sleep(2000);
 	WebDriverWait wait = new WebDriverWait(driver, 20);
 	wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("password")));
 	driver.findElement(By.name("password")).sendKeys("#abcd123");
+	Thread.sleep(2000);
 	wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(), 'Next')]")));
 	driver.findElement(By.xpath("//span[contains(text(), 'Next')]")).click();
+	Thread.sleep(2000);
 	String web = "//span[@class='bog']/b[contains(text(),'Excellent! Please verify your BioLert account to complete the signup.')]";
 	//String web = "//span[text()='Excellent! Please verify your BioLert account to complete the signup.']";
 	wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(web)));
